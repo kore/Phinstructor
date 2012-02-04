@@ -6,6 +6,13 @@ use Phinstructor,
 
 class ESpeach extends Visitor
 {
+    protected $voice;
+
+    public function __construct( $voice = 'en' )
+    {
+        $this->voice = $voice;
+    }
+
     public function visit( $training )
     {
         switch ( true )
@@ -87,7 +94,10 @@ class ESpeach extends Visitor
     protected function say( $message )
     {
         echo $message, PHP_EOL;
-        exec( "espeak -v en " . escapeshellarg( $message ) . " 2>&1 >/dev/null &" );
+        exec(
+            "espeak -v " . escapeshellarg( $this->voice ) . " " .
+            escapeshellarg( $message ) . " 2>&1 >/dev/null &"
+        );
     }
 }
 

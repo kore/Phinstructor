@@ -58,7 +58,7 @@ if ( !isset( $argv[1] ) ||
 
 $runner = new Runner(
     $schedules[$argv[1]],
-    new Visitor\ESpeach()
+    new Visitor\ESpeach( 'en' )
 );
 $runner->run();
 
