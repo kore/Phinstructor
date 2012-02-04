@@ -1,0 +1,64 @@
+#!/usr/bin/env php
+<?php
+
+namespace Phinstructor;
+
+require __DIR__ . '/../src/bootstrap.php';
+
+$schedules = array(
+    'steps'    => new Iteration(
+        new Practice(
+            new Iteration(
+                new Unit( 7.5 * 60 ), 1
+            )
+        ), 4
+    ),
+    'interval' => new Iteration(
+        new Practice(
+            new Iteration(
+                new Unit( 3 * 60 ), 3
+            )
+        ), 3
+    ),
+    'super'    => new Iteration(
+        new Practice(
+            new Iteration(
+                new Unit( 4 * 60 ), 1
+            )
+        ), 6
+    ),
+    'zirkel'   => new Iteration(
+        new Practice(
+            new Iteration(
+                new Unit( 20 * 60 ), 1
+            )
+        ), 1
+    ),
+    'intense'  => new Iteration(
+        new Practice(
+            new Iteration(
+                new Unit( 20, 10 ), 8
+            )
+        ), 3
+    ),
+);
+
+if ( !isset( $argv[1] ) ||
+     !isset( $schedules[$argv[1]] ) )
+{
+    echo "Usage: ", $argv[0], " <schedule>", PHP_EOL, PHP_EOL,
+        "Available schedules:", PHP_EOL;
+
+    foreach ( $schedules as $schedule => $definition )
+    {
+        echo " - ", $schedule, PHP_EOL;
+    }
+    exit( 1 );
+}
+
+$runner = new Runner(
+    $schedules[$argv[1]],
+    new Visitor\ESpeach()
+);
+$runner->run();
+
