@@ -18,7 +18,7 @@ $schedules = array(
             new Iteration(
                 new Unit( 3 * 60 ), 3
             )
-        ), 3
+        ), 4
     ),
     'super'    => new Iteration(
         new Practice(
