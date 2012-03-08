@@ -17,8 +17,13 @@ class ESpeach extends Visitor
     {
         switch ( true )
         {
+            case $training instanceof Phinstructor\Training:
+                $this->visitTraining( $training );
+                return;
+
             case $training instanceof Phinstructor\Iteration:
-                return $this->visitIteration( $training );
+                $this->visitIteration( $training );
+                return;
 
             case $training instanceof Phinstructor\Practice:
                 return $this->visitPractice( $training );
@@ -31,6 +36,16 @@ class ESpeach extends Visitor
                     "Unhandled element in visitor: " . get_class( $training )
                 );
         }
+    }
+
+    public function visitTraining( Phinstructor\Training $training )
+    {
+        $this->say( "Training will start in 10 seconds. Prepare." );
+        sleep( 10 );
+
+        $this->visit( $training->aggregation );
+
+        $this->say( "Finished for today." );
     }
 
     public function visitIteration( Phinstructor\Iteration $iteration )
@@ -51,7 +66,7 @@ class ESpeach extends Visitor
 
     public function visitUnit( Phinstructor\Unit $unit )
     {
-        $this->say( "Start!" );
+        $this->say( "Start unit " . ( $unit->iteration + 1 ) );
         for ( $countdown = $unit->time; $countdown > 0; --$countdown )
         {
             switch ( $countdown )

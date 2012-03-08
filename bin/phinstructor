@@ -6,41 +6,41 @@ namespace Phinstructor;
 require __DIR__ . '/../src/bootstrap.php';
 
 $schedules = array(
-    'steps'    => new Iteration(
+    'steps'    => new Training( new Iteration(
         new Practice(
             new Iteration(
                 new Unit( 7.5 * 60 ), 1
             )
         ), 4
-    ),
-    'interval' => new Iteration(
+    ) ),
+    'interval' => new Training( new Iteration(
         new Practice(
             new Iteration(
                 new Unit( 3 * 60 ), 3
             )
         ), 4
-    ),
-    'super'    => new Iteration(
+    ) ),
+    'super'    => new Training( new Iteration(
         new Practice(
             new Iteration(
                 new Unit( 4 * 60 ), 1
             )
         ), 6
-    ),
-    'zirkel'   => new Iteration(
+    ) ),
+    'zirkel'   => new Training( new Iteration(
         new Practice(
             new Iteration(
                 new Unit( 20 * 60 ), 1
             )
         ), 1
-    ),
-    'intense'  => new Iteration(
+    ) ),
+    'intense'  => new Training( new Iteration(
         new Practice(
             new Iteration(
                 new Unit( 20, 10 ), 8
             )
         ), 3
-    ),
+    ) ),
 );
 
 if ( !isset( $argv[1] ) ||
