@@ -1,0 +1,14 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+TRAINING=`zenity --list --text="Select Workout type" --radiolist \
+    --column="Auswahl" \
+    --column="Training" \
+    True steps \
+    False interval \
+    False super \
+    False zirkel \
+    False intense`
+
+$DIR/phinstructor $TRAINING
+
